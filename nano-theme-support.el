@@ -194,6 +194,10 @@
   "Default italic font (Victor Mono Italic Light, 14pt)."
   :group 'nano-theme-fonts)
 
+;; For light theme
+(defvar nano-light-modeline "#f8f8f8")  ; Subtle light gray
+(defvar nano-light-modeline-border "#e0e0e0")
+
 (defcustom nano-light-foreground "#37474F" ;; Blue Grey / L800
   "Default foreground color"
   :type 'color :group 'nano-theme-light)
@@ -693,11 +697,11 @@ background color that is barely perceptible."
 
    ;; --- Header & mode line -------------------------------------------
 
-   `(mode-line ((,light (:foreground ,nano-light-background
-                         :background ,nano-light-foreground
-                         :box (:line-width 3
-                   :color ,nano-light-foreground
-                   :style nil)))
+   `(mode-line ((,light (:foreground ,nano-light-foreground
+                         :background ,nano-light-modeline
+                         :box (:line-width 1
+                            :color ,nano-light-modeline-border
+                            :style nil)))
         (,dark  (:foreground ,nano-dark-foreground
              :background ,nano-dark-faded
                          :box (:line-width 3
@@ -774,10 +778,44 @@ background color that is barely perceptible."
    '(tty-menu-selected-face        ((t (:inherit nano-salient-i))))
 
    ;; --- Tab bar ------------------------------------------------------
-   '(tab-bar                       ((t (:inherit default))))
-   '(tab-bar-tab                   ((t (:inherit default))))
-   '(tab-bar-tab-inactive          ((t (:inherit nano-faded))))
-   '(tab-line                      ((t (:inherit default))))
+   ;; '(tab-line                      ((t (:inherit default))))
+
+   `(tab-bar ((,light (:foreground ,nano-light-foreground
+                                   :background ,nano-light-modeline
+                                   :box (:line-width 1
+                                                     :color ,nano-light-modeline-border
+                                                     :style nil)))
+              (,dark  (:foreground ,nano-dark-foreground
+                                   :background ,nano-dark-faded
+                                   :box (:line-width 3
+                                                     :color ,nano-dark-faded
+                                                     :style nil)))))
+   `(tab-bar-tab ((,light (:foreground ,nano-light-foreground
+                                       :background ,nano-light-modeline
+                                       :weight normal
+                                       :box (:line-width 1
+                                                         :color ,nano-light-modeline-border
+                                                         :style nil)))
+                  (,dark  (:foreground ,nano-dark-foreground
+                                       :background ,nano-dark-faded
+                                       :weight normal
+                                       :box (:line-width 3
+                                                         :color ,nano-dark-faded
+                                                         :style nil)))))
+
+   `(tab-bar-tab-inactive ((,light (:foreground ,nano-light-foreground
+                                                ;; :background ,nano-light-faded
+                                                ;; :weight normal
+                                                ;; :box (:line-width 3
+                                                ;;       :color ,nano-light-faded
+                                                ;;       :style nil)
+                                                ))
+                           (,dark  (:foreground ,nano-dark-faded
+                                                :background ,nano-dark-subtle
+                                                :weight normal
+                                                :box (:line-width 3
+                                                                  :color ,nano-dark-subtle
+                                                                  :style nil)))))
 
    ;; --- Line numbers -------------------------------------------------
    '(line-number                  ((t (:inherit nano-faded))))
